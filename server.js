@@ -1,7 +1,6 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-const User = require("./models/user");
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,15 +19,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/exertionDB", {
   useCreateIndex: true,
 });
 
-app.post("/users", ({ body }, res) => {
-  User.create(body)
-    .then(dbUser => {
-      res.json(dbUser);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
+require("./api-routes.js")(app);
+require("./html-routes.js")(app);
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
