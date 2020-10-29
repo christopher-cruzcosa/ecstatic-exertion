@@ -1,5 +1,7 @@
 const path = require("path");
 
+
+//these are the routes to the static html pages
 module.exports = function (app) {
     app.get("/exercise", (req, res) => {
         res.sendFile(path.join(__dirname, "./public/", "exercise.html"));

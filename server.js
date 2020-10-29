@@ -13,12 +13,15 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+//conneting mongoose to my cloud mongoDB instance
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/exertionDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
 });
 
+
+//these are the call routes
 require("./api-routes.js")(app);
 require("./html-routes.js")(app);
 

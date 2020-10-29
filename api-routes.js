@@ -2,6 +2,8 @@ const Workout = require("./models/workout");
 
 module.exports = function (app) {
 
+
+    //this route returns all workout data
     app.get("/api/workouts", function (req, res) {
         Workout.find()
             .then(workoutData => {
@@ -13,6 +15,7 @@ module.exports = function (app) {
             });
     });
 
+    //this route pushes an exercise to a workout's exercises array
     app.put("/api/workouts/:id", function (req, res) {
         const workoutData = req.body;
         console.log(workoutData);
@@ -28,6 +31,7 @@ module.exports = function (app) {
             });
     });
 
+    //this route adds a new workout entry to the db
     app.post("/api/workouts", function (req, res) {
         console.log(req.body);
         const { body } = req.body;
@@ -44,6 +48,7 @@ module.exports = function (app) {
             });
     });
 
+    //this route returns all workout data
     app.get("/api/workouts/range", function (req, res) {
         Workout.find()
             .then(workoutData => {

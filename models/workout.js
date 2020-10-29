@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-
+//this schema is specific to exerscies, and is a child schema
 const exerciseSchema = new Schema({
   type: {
     type: String,
@@ -23,15 +23,12 @@ const exerciseSchema = new Schema({
   distance: Number
 });
 
+//this is the parent schema, which stores an array of objects based on the exercise schema above
 const workoutSchema = new Schema({
   day: {
     type: Date,
     default: Date.now
   },
-  // totalDuration: {
-  //   type: Number,
-  //   default: $sum: [exercises.]
-  // },
   exercises: [exerciseSchema]
 
 });

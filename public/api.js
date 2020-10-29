@@ -13,8 +13,6 @@ const API = {
     } else {
       const newJson = json[json.length-1];
 
-    // return json[json.length - 1];
-
     let sumDuration = 0;
 
     newJson.exercises.forEach(element => {
