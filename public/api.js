@@ -8,11 +8,38 @@ const API = {
     }
     const json = await res.json();
 
-    return json[json.length - 1];
+    if (!json[0]) {
+      return
+    } else {
+      const newJson = json[json.length-1];
+
+    // return json[json.length - 1];
+
+    let sumDuration = 0;
+
+    newJson.exercises.forEach(element => {
+      sumDuration += element.duration;
+    });
+
+    newJson.totalDuration = sumDuration;
+    
+    console.log(newJson);
+    return newJson;
+    }
+
+    // return json[json.length - 1];
+
+
+
   },
   async addExercise(data) {
     const id = location.search.split("=")[1];
 
+    //added by C Cruzcosa
+    if (data.name === ""){
+      return
+    };
+    //
     const res = await fetch("/api/workouts/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -24,6 +51,9 @@ const API = {
     return json;
   },
   async createWorkout(data = {}) {
+    console.log(data);
+    console.log("howdy");
+    console.log(JSON.stringify(data));
     const res = await fetch("/api/workouts", {
       method: "POST",
       body: JSON.stringify(data),

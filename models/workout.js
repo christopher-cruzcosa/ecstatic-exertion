@@ -1,8 +1,7 @@
-// Create the required custom methods at the bottom of this file
-
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
+
 
 const exerciseSchema = new Schema({
   type: {
@@ -11,24 +10,17 @@ const exerciseSchema = new Schema({
   },
   name:{
     type: String,
-    required: "Exercise name must be selected"
+    required: "Exercise name must be selected",
+    trim: true
   },
   duration: {
     type: Number,
     required: "Duration must be set"
   },
-  weight:  {
-    Type: Number
-  },
-  reps:  {
-    Type: Number
-  },
-  sets:  {
-    Type: Number
-  },
-  distance:  {
-    Type: Number
-  },
+  weight: Number,
+  reps: Number,
+  sets: Number,
+  distance: Number
 });
 
 const workoutSchema = new Schema({
@@ -36,9 +28,13 @@ const workoutSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  // totalDuration: {
+  //   type: Number,
+  //   default: $sum: [exercises.]
+  // },
   exercises: [exerciseSchema]
-});
 
+});
 
 
 // This creates our model from the above schema, using mongoose's model method

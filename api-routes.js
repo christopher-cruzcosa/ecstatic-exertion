@@ -14,12 +14,13 @@ module.exports = function (app) {
     });
 
     app.put("/api/workouts/:id", function (req, res) {
-        const object = req.body
+        const workoutData = req.body;
+        console.log(workoutData);
 
-        Workout.replaceOne({ _id: req.params.id }, object)
+        Workout.update({ _id: req.params.id }, { $push: {exercises: workoutData} }, {runValidators: true})
             .then(data => {
                 console.log(data);
-                res.sendStatus(200);
+                res.json(data);
             })
             .catch(err => {
                 console.log(err);
@@ -28,6 +29,7 @@ module.exports = function (app) {
     });
 
     app.post("/api/workouts", function (req, res) {
+        console.log(req.body);
         const { body } = req.body;
         console.log(body);
         const workout = new Workout(body);
